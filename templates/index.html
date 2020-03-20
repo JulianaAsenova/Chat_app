@@ -1,8 +1,53 @@
-<html>
-<head>
-    <title>Test page</title>
-</head>
-<body>
-    <p>Hello, world!</p>
-</body>
-</html>
+<!DOCTYPE html>
+  <html>
+  <head>
+    <title>Chat_app</title>
+  </head>
+  <body>
+  
+    <div class="messages"></div>
+
+    <form>
+      <input type="text" class="username" placeholder="User"/>
+      <input type="text" class="message" placeholder="Message"/>
+      <input type="submit"/>
+    </form>
+
+    <!-- using jQuery ( a JavaScript library ) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!-- needed to use jQuery from Google -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script> <!-- loads the Socket.IO library -->
+	<script type="text/javascript" charset="utf-8">
+
+      var socket = io.connect('http://' + document.domain + ':' + location.port)
+      
+      socket.on( 'connect', function() {
+      
+        socket.emit( 'my event', {
+          data: 'User Connected'
+        } )
+        
+        var form = $( 'form' ).on( 'submit', function( e ) {
+          e.preventDefault()
+          let user_name = $( 'input.username' ).val()
+          let user_input = $( 'input.message' ).val()
+          
+          socket.emit( 'my event', {
+            user_name : user_name,
+            message : user_input
+          } )
+          
+          $( 'input.message' ).val( '' ).focus()
+        } )
+        
+      } )
+      
+      socket.on( 'my response', function( msg ) {
+        console.log( msg )
+        if (typeof msg.user_name !== 'undefined' ) {
+          $( 'div.messages' ).append( '<div><strong style="color: black">'+msg.user_name+'</strong> '+msg.message+'</div>' )
+        }
+      } )
+    </script>
+
+  </body>
+  </html>
