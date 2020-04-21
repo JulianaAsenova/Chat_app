@@ -1,53 +1,45 @@
 <!DOCTYPE html>
-  <html>
+ 
+
+
+
+ <html>
   <head>
     <title>Chat_app</title>
   </head>
   <body>
-  
-    <div class="messages"></div>
+<!-- Navigation bar -->
+    	<nav>
 
-    <form>
-      <p><input type="text" class="username" placeholder="User"/></p>
-      <p><input type="text" class="message" placeholder="Write a message"/></p>
-      <p><input type="submit"/></p>
-    </form>
 
-    <!-- using jQuery ( a JavaScript library ) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <!-- needed to use jQuery from Google -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script> <!-- loads the Socket.IO library -->
-	<script type="text/javascript" charset="utf-8">
 
-      var socket = io.connect('http://' + document.domain + ':' + location.port)
-      
-      socket.on( 'connect', function() {
-      
-        socket.emit( 'my event', {
-          data: 'User Connected'
-        } )
-        
-        var form = $( 'form' ).on( 'submit', function( e ) {
-          e.preventDefault()
-          let user_name = $( 'input.username' ).val()
-          let user_input = $( 'input.message' ).val()
-          
-          socket.emit( 'my event', {
-            user_name : user_name,
-            message : user_input
-          } )
-          
-          $( 'input.message' ).val( '' ).focus()
-        } )
-        
-      } )
-      
-      socket.on( 'my response', function( msg ) {
-        console.log( msg )
-        if (typeof msg.user_name !== 'undefined' ) {
-          $( 'div.messages' ).append( '<div><strong style="color: black">'+msg.user_name+'</strong> '+msg.message+'</div>' )
-        }
-      } )
-    </script>
+
+	</nav>
+    
+	<div id = "main section">
+<!-- Room selection bar -->
+		<nav id = sidebar>
+
+
+
+
+		</nav>
+		
+<!-- Message area -->
+		<div class="rightside-pannel"> 
+<!-- Display message -->
+			<div id = 'display-message-section'> 
+
+				<input type = "text" id = "user_message" name="" placeholder = "Type here..." autocomplete ="off">
+				<button type ="button" id = "send_message">SEND</button>
+			</div> 
+<!-- Message input -->			
+			<div id = 'input-area'>
+    		</div>
+	</div>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/		    					GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+
+	<script src ="{{url_for('static', filename = 'scripts/socketio.js')}}"></script>
 
   </body>
   </html>
