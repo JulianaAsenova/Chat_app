@@ -1,45 +1,43 @@
 <!DOCTYPE html>
- 
-
-
-
- <html>
+<html>
   <head>
+		<mete charset="utf-8">
     <title>Chat_app</title>
   </head>
   <body>
-<!-- Navigation bar -->
+		<!-- Navigation bar -->
     	<nav>
 
 
-
-
-	</nav>
+		</nav>
     
-	<div id = "main section">
-<!-- Room selection bar -->
-		<nav id = sidebar>
-
-
-
+	<div id="main section">
+		<!-- Room selection bar -->
+		<nav id = "sidebar">
 
 		</nav>
 		
-<!-- Message area -->
-		<div class="rightside-pannel"> 
-<!-- Display message -->
-			<div id = 'display-message-section'> 
+		<!-- Message area -->
+		<div id="rightside-pannel"> 
 
-				<input type = "text" id = "user_message" name="" placeholder = "Type here..." autocomplete ="off">
-				<button type ="button" id = "send_message">SEND</button>
-			</div> 
-<!-- Message input -->			
-			<div id = 'input-area'>
-    		</div>
+			<!-- Display message -->
+			<div id="display-message-section"> 
+			
+			</div>
+
+			<!--Imput message -->
+			<div id="input-area">
+				<input type="text" id="user_message" placeholder = "Type here..." autocomplete ="off">
+				<button type="button" id="send_message">SEND</button>
+			</div> 		
+    	</div>
+
 	</div>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/		    					GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
 
-	<script src ="{{url_for('static', filename = 'scripts/socketio.js')}}"></script>
+	<!--Sockeetio JS -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+
+	<script src ="{{url_for('static', filename = 'script/socketio.js')}}"></script>
 
   </body>
   </html>
