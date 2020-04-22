@@ -6,13 +6,10 @@ from flask_socketio import SocketIO, send, emit, join_room, leave_room
 import json
 
 from user import User
+
+
 app = Flask(__name__)
 socketio = SocketIO(app)
-
-
-
-
-
 
 
 @app.route("/users", methods = ["POST"])
@@ -52,7 +49,6 @@ def delete_user(user_id):
 def session():
     return render_template('index.html')
 
-<<<<<<< HEAD
 
 @socketio.on('messade')
 def message(data):
@@ -60,14 +56,7 @@ def message(data):
 	print(f"\n\n{data}\n\n")
 
 	send(data)
-=======
-  
-
-#@socketio.on('messade')
-#def message(data):
-#
-#	send(data)
->>>>>>> b12aeca60b854fa5d7d7a6679ecda47a65a31958
+ 
 
 
 @socketio.on('join')
