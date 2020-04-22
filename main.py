@@ -52,12 +52,8 @@ def session():
 
 @socketio.on('messade')
 def message(data):
-
-	print(f"\n\n{data}\n\n")
-
 	send(data)
  
-
 
 @socketio.on('join')
 def join(data):
