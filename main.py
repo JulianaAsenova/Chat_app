@@ -49,7 +49,7 @@ def session():
     return render_template('index.html')
 
 
-@socketio.on('messade')
+@socketio.on('message')
 def message(data):
 	
 	print(f"\n\n{data}\n\n")
