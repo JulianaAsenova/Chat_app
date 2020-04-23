@@ -5,17 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		socket.send("I am connected");	
 	});
 
-
 	socket.on('message', data => {
+		console.log(`Message recived: ${data}`)
+		
 		const p = document.createElement('p');
 		const br = ocument.createElement('br');	
 		p.innerHTML = data;
 		document.querySelector('#display-message-section').append(p);
 	});
 
-	socket.on('some-event', data => {
-		console.log(data);
-	});
 
 	document.querySelector('#send_message').onclick = () => {
 		socket.send(document.querySelector('#user_message').value)	

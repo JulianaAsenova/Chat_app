@@ -1,6 +1,5 @@
 from flask import Flask
 from flask import render_template
-from flask_socketio import SocketIO
 from flask_socketio import SocketIO, send, emit, join_room, leave_room
 
 import json
@@ -52,6 +51,9 @@ def session():
 
 @socketio.on('messade')
 def message(data):
+	
+	print(f"\n\n{data}\n\n")
+	
 	send(data)
  
 
@@ -62,7 +64,7 @@ def join(data):
 
 
 @socketio.on('leave')
-def join(data):
+def leave(data):
 	leave_room(data['room'])
 	send({'msg': data[username] + "has left the " + data['room'] + "room"}, room=data['room'])
 
