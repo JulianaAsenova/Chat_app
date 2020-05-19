@@ -1,61 +1,23 @@
-<!DOCTYPE html>
-<html>
-  <head>
-	<mete charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+{% from 'field-macro.html' import displayField %}
+{% extends "prelogin-layout.html" %}
 
-    <title>Chat_app</title>
-	
-	<!-- Bootstrap -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+{% block title %}Register {% endblock title%}
 
-	<!-- Custom css for chat pages -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/chat_style.css') }}">
+{% block content %}
+        <h2>Get started!</h2>
+        <p>First time here? Register to start using the chat</p>
 
-  </head>
-  <body>
-		<!-- Navigation bar -->
-    	<nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: #bebef3">
+        <form action="{{ url_for('index') }}", method="POST">
+            {{ displayField(form.username, 'Username', autocomplete="off", autofocus=true) }}
+            {{ displayField(form.password, 'Password') }}
+            {{ displayField(form.confirm_pswd, 'Retype Password') }}
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-warning">
+            </div>
+            {{ form.csrf_token }}
+        </form>
 
+        <hr>
 
-		</nav>
-    
-	<div id="main section">
-		<!-- Room selection bar -->
-		<nav id="sidebar">
-        	<h4>Rooms</h4>
-
-        </nav>
-		
-		<!-- Message area -->
-		<div id="rightside-pannel" style="background-color: #e6e6ff"> 
-
-			<!-- Display message -->
-			<div id="display-message-section"> 
-			
-			</div>
-
-			<!--Imput message -->
-			<div id="input-area" class="input-group mb-3">
-				<input type="text" id="user_message" class="form-control" placeholder="Type here..." aria-label="Type a message" aria-describedby="basic-addon2" autocomplete="off">
-				<div class="input-group-append">
-                	<button id="send_message" class="btn btn-warning" type="button">SEND</button>
-                </div>
-			</div> 		
-    	</div>
-
-	</div>
-
-	<!--Sockeetio JS -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
-
-
-	<!-- Custom SocketIO JS -->
-	<script src ="{{url_for('static', filename = 'script/socketio.js')}}"></script>
-
-    </body>
-</html>
-
-
-  </body>
-  </html>
+        <p>Already registered? <a href={{url_for('login')}}>Login here</a>.</p>
+{% endblock %}
